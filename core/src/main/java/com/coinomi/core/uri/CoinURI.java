@@ -172,7 +172,13 @@ public class CoinURI {
             schemeSpecificPart = input.substring((uriScheme + "://").length());
         } else if (input.startsWith(uriScheme + ":")) {
             schemeSpecificPart = input.substring((uriScheme + ":").length());
-        } else {
+        } // Fall back to case insensitive comparison if no plain match.
+        else if (input.toLowerCase().startsWith(uriScheme + "://")) {
+            schemeSpecificPart = input.substring((uriScheme + "://").length());
+        } else if (input.toLowerCase().startsWith(uriScheme + ":")) {
+            schemeSpecificPart = input.substring((uriScheme + ":").length());
+        }
+        else {
             throw new CoinURIParseException("Unsupported URI scheme: " + uri.getScheme());
         }
 

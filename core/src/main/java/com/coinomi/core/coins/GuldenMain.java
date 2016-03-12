@@ -21,8 +21,8 @@ public class GuldenMain extends CoinType {
         uriScheme = "gulden";
         bip44Index = 87;
         unitExponent = 8;
-        feePerKb = value(100000);
-        minNonDust = value(1000);
+        feePerKb = value(1000000);
+        minNonDust = value(10000);
         softDustLimit = value(100000);
         softDustPolicy = SoftDustPolicy.BASE_FEE_FOR_EACH_SOFT_DUST_TXO;
         signedMessageHeader = toBytes("Gulden Signed Message:\n");

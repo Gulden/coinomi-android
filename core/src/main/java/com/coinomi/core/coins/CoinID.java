@@ -87,6 +87,7 @@ public enum CoinID {
             }
             idLookup.put(id.type.getId(), id.type);
 
+
             if (!uriLookup.containsKey(id.type.uriScheme)) {
                 uriLookup.put(id.type.uriScheme, new ArrayList<CoinType>());
             }
@@ -130,12 +131,21 @@ public enum CoinID {
                 return uriLookup.get(uri);
             }
         }
+        // Fall back to case insensitive comparison if no plain match.
+        for (String uri : uriLookup.keySet()) {
+            if (input.toLowerCase().startsWith(uri + "://") || input.toLowerCase().startsWith(uri + ":")) {
+                return uriLookup.get(uri);
+            }
+        }
         throw new IllegalArgumentException("Unsupported URI: " + input);
     }
 
     public static List<CoinType> fromUriScheme(String scheme) {
         if (uriLookup.containsKey(scheme)) {
             return uriLookup.get(scheme);
+        } // Fall back to case insensitive comparison if no plain match.
+        else if (uriLookup.containsKey(scheme.toLowerCase())) {
+            return uriLookup.get(scheme.toLowerCase());
         } else {
             throw new IllegalArgumentException("Unsupported URI scheme: " + scheme);
         }
