@@ -87,7 +87,6 @@ public enum CoinID {
             }
             idLookup.put(id.type.getId(), id.type);
 
-
             if (!uriLookup.containsKey(id.type.uriScheme)) {
                 uriLookup.put(id.type.uriScheme, new ArrayList<CoinType>());
             }
